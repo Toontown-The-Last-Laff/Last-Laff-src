@@ -2143,7 +2143,7 @@ QuestDict = {
  712: (TT_TIER+2, Cont, (VisitQuest,), 2003, ToonHQ, 102, NA, DefaultDialog),
 
  740: (TT_TIER+2, Start, (VisitQuest,), ToonHQ, 2001, NA, 741, DefaultDialog),
- 741: (TT_TIER+2, Cont, (CogTierQuest, Anywhere, 3, 1), 2001, 2001, NA, 742, DefaultDialog),
+ 741: (TT_TIER+2, Cont, (CogTierQuest, Anywhere, 3, 0), 2001, 2001, NA, 742, DefaultDialog),
  742: (TT_TIER+2, Cont, (VisitQuest,), 2001, ToonHQ, 102, NA, DefaultDialog),
 
  750: (TT_TIER+2, Start, (VisitQuest,), ToonHQ, 2005, NA, 751, DefaultDialog),

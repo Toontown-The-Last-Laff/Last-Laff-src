@@ -39,11 +39,11 @@ class DistributedBattleBldg(DistributedBattleBase.DistributedBattleBase):
         for suit in self.suits:
             dept = suit.dna.dept
         
-        dept2battleThemes = {'c': ['phase_7/audio/bgm/encntr_general_bg_indoor.ogg',
-                                   'phase_7/audio/bgm/encntr_general_bg_indoor.ogg',
-                                   'phase_7/audio/bgm/encntr_general_bg_indoor.ogg',
-                                   'phase_7/audio/bgm/encntr_general_bg_indoor.ogg',
-                                   'phase_7/audio/bgm/encntr_suit_winning_indoor.ogg'],
+        dept2battleThemes = {'c': ['phase_7/audio/bgm/laff_ara_suitCorpInterior_bottomFloor_1.ogg',
+                                   'phase_7/audio/bgm/laff_ara_suitCorpInterior_bottomFloor_2.ogg',
+                                   'phase_7/audio/bgm/laff_ara_suitCorpInterior_bottomFloor_3.ogg',
+                                   'phase_7/audio/bgm/laff_ara_suitCorpInterior_bottomFloor_4.ogg',
+                                   'phase_7/audio/bgm/laff_ara_suitCorpInterior_encntrBoss.ogg'],
                              'l': ['phase_7/audio/bgm/laff_ara_suitLegalInterior_bottomFloor_1.ogg',
                                    'phase_7/audio/bgm/laff_ara_suitLegalInterior_bottomFloor_2.ogg',
                                    'phase_7/audio/bgm/laff_ara_suitLegalInterior_bottomFloor_3.ogg',
@@ -54,7 +54,7 @@ class DistributedBattleBldg(DistributedBattleBase.DistributedBattleBase):
                                    'phase_7/audio/bgm/laff_ara_suitMoneyInterior_bottomFloor_3.ogg',
                                    'phase_7/audio/bgm/laff_ara_suitMoneyInterior_bottomFloor_4.ogg',
                                    'phase_7/audio/bgm/laff_ara_suitMoneyInterior_encntrBoss.ogg'],
-                             'c': ['phase_7/audio/bgm/laff_ara_suitSalesInterior_bottomFloor_1.ogg',
+                             's': ['phase_7/audio/bgm/laff_ara_suitSalesInterior_bottomFloor_1.ogg',
                                    'phase_7/audio/bgm/laff_ara_suitSalesInterior_bottomFloor_2.ogg',
                                    'phase_7/audio/bgm/laff_ara_suitSalesInterior_bottomFloor_3.ogg',
                                    'phase_7/audio/bgm/laff_ara_suitSalesInterior_bottomFloor_4.ogg',
