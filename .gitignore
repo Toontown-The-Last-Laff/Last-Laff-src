@@ -1,4 +1,9 @@
-bin/
-build/
-__pycache__/
-.DS_Store
+screenshots/
+sign/
+whitelist/
+news/
+*.buildings
+backups/
+settings.json
+errorCode
+
