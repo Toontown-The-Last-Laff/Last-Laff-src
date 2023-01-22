@@ -184,6 +184,85 @@ class QuestManagerAI:
     def avatarCancelled(self, avId):
         pass
 
+    def incrementReward(self, av):
+        # See if we finished a tier
+        rewardTier=av.getRewardTier()
+        # Make sure all the rewards have been handed out and
+        # Make sure we have completed them all
+        # First, make sure that the list is at least as big as the number of rewards
+        # Then, make sure we have completed them all
+        # Then, make sure all the rewards in the tier are in our history
+        rewardHistory=av.getRewardHistory()[1]
+        if (
+                # We cannot do this short-circuit test anymore because having
+                # cog suit parts counts as a reward in cashbot
+                # HQ. Unfortunately we are losing a pretty nice optimization
+                # here. TODO: revisit and optimize.
+                # (len(rewardHistory) >= Quests.getNumRewardsInTier(rewardTier)) and
+
+                # We cannot do this because they might still be working on a few
+                # optional quests from the old tier.
+                # (len(av.quests) == 0) and
+
+                # Make sure they have all the required rewards
+                (Quests.avatarHasAllRequiredRewards(av, rewardTier)) and
+
+                # Make sure they are not still working on required rewards
+                (not Quests.avatarWorkingOnRequiredRewards(av))
+        ):
+
+            if not Quests.rewardTierExists(rewardTier + 1):
+                self.notify.info("incrementReward: avId %s, at end of rewards" %
+                                 (av.getDoId()))
+                return 0
+
+            rewardTier+=1
+            self.notify.info("incrementReward: avId %s, new rewardTier: %s" %
+                             (av.getDoId(), rewardTier))
+
+            # If we have just moved on to the next tier, blow away the
+            # old history, which is no longer needed.
+            av.b_setQuestHistory([])
+            av.b_setRewardHistory(rewardTier, [])
+
+            # The above will clear the quest history the *first* time
+            # we cross into the next tier.  There may still be some
+            # quest id's hiding behind visit quests that belong to the
+            # previous tier; these will find their way onto the quest
+            # history when we eventually reveal them, but they will
+            # still be associated with the previous tier.  This does
+            # no harm, so we won't worry about it; but it does mean
+            # that the questHistory list is not guaranteed to only
+            # list quests on the current tier.  It is simply
+            # guaranteed to list all the completed and in-progress
+            # quests on the current tier, with maybe one or two others
+            # thrown in.
+            return 1
+        else:
+            self.notify.debug("incrementReward: avId %s, not ready for new tier" %
+                              (av.getDoId()))
+            return 0
+
+    def avatarChoseTrack(self, avId, npc, questId, trackId):
+        # This is a message that came from the client, through the NPCToonAI.
+        # It is in response to the avatar picking from a multiple choice menu
+        # of track options, along with a cancel option
+        self.notify.info("avatarChoseTrack: avId: %s trackId: %s" % (avId, trackId))
+        av=self.air.doId2do.get(avId)
+        if av:
+            # Remove the track choice quest
+            av.removeQuest(questId)
+            # Update the toon with the reward
+            rewardId=Quests.getRewardIdFromTrackId(trackId)
+            reward=Quests.getReward(rewardId)
+            reward.sendRewardAI(av)
+            # Tell the npc to deliver the movie which will
+            # complete the quest, display the reward, and do nothing else
+            npc.completeQuest(av.getDoId(), questId, rewardId)
+            self.incrementReward(av)
+        else:
+            self.notify.warning("avatarChoseTrack: av is gone.")
+
     def avatarChoseQuest(self, avId, npc, questId, rewardId, toNpcId):
         av = self.air.doId2do.get(avId)
         if not av:

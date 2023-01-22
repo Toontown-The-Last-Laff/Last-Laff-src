@@ -2114,40 +2114,44 @@ def isQuestJustForFun(questId, rewardId):
 NoRewardTierZeroQuests = ()
 RewardTierZeroQuests = ()
 PreClarabelleQuestIds = NoRewardTierZeroQuests + RewardTierZeroQuests
-QuestDict = {}
+
 QuestDict = {
- 710: (TT_TIER,
-       Start,
-       (VisitQuest,),
-       ToonHQ,
-       2001,
-       NA,
-       711,
-       TTLocalizer.QuestDialogDict[110]),
- 711: (TT_TIER,
-       Cont,
-       (CogTierQuest, Anywhere, 5, 1),
-       2001,
-       2001,
-       NA,
-       712,
-       TTLocalizer.QuestDialogDict[111]),
- 712: (TT_TIER,
-       Cont,
-       (SkeleReviveTrackQuest, Anywhere, 1, 'l'),
-       2001,
-       2001,
-       NA,
-       713,
-       TTLocalizer.QuestDialogDict[112]),
- 713: (TT_TIER,
-       Cont,
-       (CogLevelTypeQuest, Anywhere, 2, 7, 'b'),
-       2001,
-       2001,
-       100,
-       NA,
-       TTLocalizer.QuestDialogDict[113]),
+ 101: (TT_TIER, Start, (CogQuest, Anywhere, 1, Any), Any, ToonHQ, NA, 110, DefaultDialog),
+
+ #Choose a Gag Track to Train
+ 110: (TT_TIER, Start, (TrackChoiceQuest, ToontownBattleGlobals.SOUND_TRACK, ToontownBattleGlobals.HEAL_TRACK), ToonHQ, ToonHQ, 400, NA, DefaultDialog),
+
+ #Training TTC Quests
+ 760: (TT_TIER+2, Start, (CogTrackQuest, Anywhere, 1, 'c'), ToonHQ, ToonHQ, Any, NA, DefaultDialog),
+ 761: (TT_TIER+2, Start, (CogTrackQuest, Anywhere, 1, 'l'), ToonHQ, ToonHQ, Any, NA, DefaultDialog),
+ 762: (TT_TIER+2, Start, (CogTrackQuest, Anywhere, 1, 'm'), ToonHQ, ToonHQ, Any, NA, DefaultDialog),
+ 763: (TT_TIER+2, Start, (CogTrackQuest, Anywhere, 1, 's'), ToonHQ, ToonHQ, Any, NA, DefaultDialog),
+ 764: (TT_TIER+2, Start, (CogTrackQuest, Anywhere, 2, 'c'), ToonHQ, ToonHQ, Any, NA, DefaultDialog),
+ 765: (TT_TIER+2, Start, (CogTrackQuest, Anywhere, 2, 'l'), ToonHQ, ToonHQ, Any, NA, DefaultDialog),
+ 766: (TT_TIER+2, Start, (CogTrackQuest, Anywhere, 2, 'm'), ToonHQ, ToonHQ, Any, NA, DefaultDialog),
+ 767: (TT_TIER+2, Start, (CogTrackQuest, Anywhere, 2, 's'), ToonHQ, ToonHQ, Any, NA, DefaultDialog),
+ 768: (TT_TIER+2, Start, (CogTrackQuest, Anywhere, 3, 'c'), ToonHQ, ToonHQ, Any, NA, DefaultDialog),
+ 769: (TT_TIER+2, Start, (CogTrackQuest, Anywhere, 3, 'l'), ToonHQ, ToonHQ, Any, NA, DefaultDialog),
+ 770: (TT_TIER+2, Start, (CogTrackQuest, Anywhere, 3, 'm'), ToonHQ, ToonHQ, Any, NA, DefaultDialog),
+ 771: (TT_TIER+2, Start, (CogTrackQuest, Anywhere, 3, 's'), ToonHQ, ToonHQ, Any, NA, DefaultDialog),
+ 772: (TT_TIER+2, Start, (CogTrackQuest, Anywhere, 2, 'c'), ToonHQ, ToonHQ, Any, NA, DefaultDialog),
+ 773: (TT_TIER+2, Start, (CogTrackQuest, Anywhere, 2, 'l'), ToonHQ, ToonHQ, Any, NA, DefaultDialog),
+
+ #TTC NPC Quests
+ 710: (TT_TIER+2, Start, (VisitQuest,), ToonHQ, 2003, NA, 711, DefaultDialog),
+ 711: (TT_TIER+2, Cont, (CogQuest, Anywhere, 3, Any), 2003, 2003, NA, 712, DefaultDialog),
+ 712: (TT_TIER+2, Cont, (VisitQuest,), 2003, ToonHQ, 102, NA, DefaultDialog),
+
+ 740: (TT_TIER+2, Start, (VisitQuest,), ToonHQ, 2001, NA, 741, DefaultDialog),
+ 741: (TT_TIER+2, Cont, (CogTierQuest, Anywhere, 3, 1), 2001, 2001, NA, 742, DefaultDialog),
+ 742: (TT_TIER+2, Cont, (VisitQuest,), 2001, ToonHQ, 102, NA, DefaultDialog),
+
+ 750: (TT_TIER+2, Start, (VisitQuest,), ToonHQ, 2005, NA, 751, DefaultDialog),
+ 751: (TT_TIER+2, Cont, (CogTrackQuest, Anywhere, 3, 'c', Any), 2005, 2005, NA, 752, DefaultDialog),
+ 752: (TT_TIER+2, Cont, (VisitQuest,), 2005, ToonHQ, 102, NA, DefaultDialog),
+
+
+
 }
 #(CogLevelTypeQuest, Anywhere, 2, 7, 'b'),
 Tier2QuestsDict = {}
@@ -3721,32 +3725,25 @@ def getRewardIdFromTrackId(trackId):
     return 401 + trackId
 
 
-RequiredRewardTrackDict = {TT_TIER: (100,),
- TT_TIER + 1: (100,),
- TT_TIER + 2: (100,
-               801,
-               200,
+RequiredRewardTrackDict = {TT_TIER: (400,),
+ TT_TIER + 1: (),
+ TT_TIER + 2: (102,
+               102,
+               102,
                802,
                803,
-               101,
                804,
                805,
-               102,
                806,
                807,
-               100,
                808,
                809,
-               101,
                810,
                811,
-               500,
                812,
                813,
-               700,
                814,
-               815,
-               300),
+               815),
  TT_TIER + 3: (900,),
  DD_TIER: (400,),
  DD_TIER + 1: (100,
