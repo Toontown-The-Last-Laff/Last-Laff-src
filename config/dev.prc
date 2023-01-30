@@ -2,7 +2,7 @@
 # specific to developer instances of Toontown Online.
 
 # Window settings
-window-title Toontown Online [DEV]
+window-title Toontown: The Last Laff [SUITOPIA v0.1]
 
 # Notify settings
 console-output true
