@@ -12,6 +12,7 @@ from toontown.building import DistributedBBElevatorAI
 from toontown.building import DistributedBoardingPartyAI
 from toontown.building import FADoorCodes
 from toontown.coghq import DistributedCogKartAI
+from toontown.coghq import DistributedMintElevatorExtAI
 
 class BossbotHQDataAI(HoodDataAI.HoodDataAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('BossbotHQDataAI')
@@ -34,6 +35,16 @@ class BossbotHQDataAI(HoodDataAI.HoodDataAI):
             elev.generateWithRequired(ToontownGlobals.LawbotOfficeExt)
             self.addDistObj(elev)
 
+        self.testElev1=DistributedMintElevatorExtAI.DistributedMintElevatorExtAI(self.air, self.air.mintMgr,
+                                                                                 ToontownGlobals.CashbotMintIntB,
+                                                                                 antiShuffle=0, minLaff=15)
+        self.testElev1.generateWithRequired(ToontownGlobals.BossbotHQ)
+        self.addDistObj(self.testElev1)
+        self.testElev2=DistributedMintElevatorExtAI.DistributedMintElevatorExtAI(self.air, self.air.mintMgr,
+                                                                                 ToontownGlobals.CashbotMintIntC,
+                                                                                 antiShuffle=0, minLaff=15)
+        self.testElev2.generateWithRequired(ToontownGlobals.BossbotHQ)
+        self.addDistObj(self.testElev2)
         self.lobbyMgr = LobbyManagerAI.LobbyManagerAI(self.air, DistributedBossbotBossAI.DistributedBossbotBossAI)
         self.lobbyMgr.generateWithRequired(ToontownGlobals.BossbotLobby)
         self.addDistObj(self.lobbyMgr)
@@ -58,10 +69,6 @@ class BossbotHQDataAI(HoodDataAI.HoodDataAI):
             self.addDistObj(extDoor)
 
         makeDoor(ToontownGlobals.BossbotLobby, 0, 0, FADoorCodes.BB_DISGUISE_INCOMPLETE)
-        kartIdList = self.createCogKarts()
-        if simbase.config.GetBool('want-boarding-groups', 1):
-            self.courseBoardingParty = DistributedBoardingPartyAI.DistributedBoardingPartyAI(self.air, kartIdList, 4)
-            self.courseBoardingParty.generateWithRequired(self.zoneId)
 
     def createCogKarts(self):
         posList = (

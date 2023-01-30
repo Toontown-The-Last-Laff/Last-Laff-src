@@ -24,10 +24,10 @@ class BossbotCogHQLoader(CogHQLoader.CogHQLoader):
             state = self.fsm.getStateNamed(stateName)
             state.addTransition('countryClubInterior')
 
-        self.musicFile = 'phase_12/audio/bgm/laff_ara_bossHQ.ogg'
-        self.cogHQExteriorModelPath = 'phase_12/models/bossbotHQ/CogGolfHub'
+        self.musicFile = 'phase_14/audio/bgm/laff_ara_suitop_courtyard.ogg'
+        self.cogHQExteriorModelPath = 'phase_14/models/neighborhoods/CogNation'
         self.factoryExteriorModelPath = 'phase_11/models/lawbotHQ/LB_DA_Lobby'
-        self.cogHQLobbyModelPath = 'phase_12/models/bossbotHQ/CogGolfCourtyard'
+        self.cogHQLobbyModelPath = 'phase_14/models/neighborhoods/CogNation'
         self.geom = None
         return
 
@@ -48,12 +48,6 @@ class BossbotCogHQLoader(CogHQLoader.CogHQLoader):
         self.notify.debug('zoneId = %d ToontownGlobals.BossbotHQ=%d' % (zoneId, ToontownGlobals.BossbotHQ))
         if zoneId == ToontownGlobals.BossbotHQ:
             self.geom = loader.loadModel(self.cogHQExteriorModelPath)
-            gzLinkTunnel = self.geom.find('**/LinkTunnel1')
-            gzLinkTunnel.setName('linktunnel_gz_17000_DNARoot')
-            self.makeSigns()
-            top = self.geom.find('**/TunnelEntrance')
-            origin = top.find('**/tunnel_origin')
-            origin.setH(-33.33)
         elif zoneId == ToontownGlobals.BossbotLobby:
             if base.config.GetBool('want-qa-regression', 0):
                 self.notify.info('QA-REGRESSION: COGHQ: Visit BossbotLobby')

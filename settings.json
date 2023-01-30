@@ -1,11 +1,12 @@
 {
     "game": {
         "interpolate-animations": true, 
-        "FOV": 130, 
+        "FOV": 89, 
         "antialiasing": 70, 
         "customKeybinds": true, 
         "movement_mode": 0, 
         "stretched-screen": false, 
+        "fovEffects": false, 
         "keymap": {
             "SPRINT_KEY": "shift", 
             "MOVE_LEFT": "a", 
